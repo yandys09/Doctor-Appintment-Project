@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import axios from "axios";
 
 const HomePage = () => {
-
   // login user data
   const getUserData = async () => {
     try {
@@ -22,7 +21,7 @@ const HomePage = () => {
 
   useEffect(() => {
     return () => {
-    getUserData();
+      getUserData();
     };
   }, []);
 
