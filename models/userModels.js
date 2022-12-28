@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  notification: {
+  notifcation: {
     type: Array,
     default: []
   },

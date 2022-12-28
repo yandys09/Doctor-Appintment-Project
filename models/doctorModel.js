@@ -40,6 +40,10 @@ const doctorSchema = new mongoose.Schema(
       type: Number,
       required: [true, "수수료는 필수 항목입니다."],
     },
+    status: {
+      type: String,
+      default: '보류중'
+    },
     timings: {
       type: Object,
       required: [true, "일 하는 시간은 필수 항목입니다."],
@@ -48,5 +52,5 @@ const doctorSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const doctorModel = mongoose.model("users", doctorSchema);
+const doctorModel = mongoose.model("doctors", doctorSchema);
 module.exports = doctorModel;
