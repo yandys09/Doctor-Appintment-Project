@@ -112,9 +112,59 @@ const applyDoctorController = async (req, res) => {
   }
 };
 
+// notificatioin ctrl
+const getAllNotificationController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ _id: req.body.userId });
+    const seennotification = user.seennotification;
+    const notifcation = user.notifcation;
+    seennotification.push(...notifcation);
+    user.notifcation = [];
+    user.seennotification = notifcation;
+    const updatedUser = await user.save();
+    res.status(200).send({
+      success: true,
+      message: "모든 알림 읽음으로 표시",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "알림(Notification) 오류",
+      success: false,
+      error,
+    });
+  }
+};
+
+// delete notifications
+const deleteAllNotificationController = async (req, res) => {
+  try {
+    const user = await userModel.findOne({ _id: req.body.userId });
+    user.notifcation = [];
+    user.seennotification = [];
+    const updatedUser = await user.save();
+    updatedUser.password = undefined;
+    res.status(200).send({
+      success: true,
+      message: "알림이 성공적으로 삭제되었습니다.",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "모든 알림을 삭제할 수 없습니다.",
+      error,
+    });
+  }
+};
+
 module.exports = {
   loginController,
   registerController,
   authController,
   applyDoctorController,
+  getAllNotificationController,
+  deleteAllNotificationController,
 };
