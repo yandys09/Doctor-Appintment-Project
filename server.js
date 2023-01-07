@@ -8,7 +8,7 @@ const connectDB = require("./config/db");
 //rest object
 const app = express();
 
-// 
+//
 app.use(helmet());
 
 //dotenv config
@@ -26,6 +26,7 @@ app.use(morgan("dev"));
 
 //routes
 app.use("/api/v1/user", require("./routes/userRoutes"));
+app.use("/api/v1/admin", require("./routes/adminRoutes"));
 
 //port
 const port = process.env.PORT || 5000;
